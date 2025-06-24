@@ -1,74 +1,24 @@
-<?php
-session_start();
-
-$salt = 'XyZzy12*_';
-$stored_hash = hash('md5', $salt . 'php123'); // password is php123
-
-$failure = false;
-
-if ( isset($_POST['cancel']) ) {
-    header("Location: index.php");
-    return;
-}
-
-if (isset($_POST['who']) && isset($_POST['pass'])) {
-    if (strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1) {
-        $failure = "Email and password are required";
-    } elseif (strpos($_POST['who'], '@') === false) {
-        $failure = "Email must have an at-sign (@)";
-    } else {
-        $check = hash('md5', $salt . $_POST['pass']);
-        if ($check == $stored_hash) {
-            $_SESSION["who"] = $_POST["who"];
-            header("Location: game.php");
-            return;
-        } else {
-            $failure = "Incorrect password";
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-
-    <title>e414af7c - Login Page</title>
+<title>Anamitra Musib 32ce3337</title>
+<?php require_once "bootstrap.php"; ?>
 </head>
 <body>
 <div class="container">
-    <h1>Please Log In</h1>
-
-    <?php
-        if ( $failure !== false ) {
-            echo('<p style="color: red;">'.htmlentities($failure)."</p>\n");
-        }
-    ?>
-
-    <form method="POST">
-        <label for="nam">User Name</label>
-        <input type="text" name="who" id="nam"><br>
-        <label for="id_1723">Password</label>
-        <input type="text" name="pass" id="id_1723"><br>
-        <input type="submit" value="Log In">
-        <input type="submit" name="cancel" value="Cancel">
-    </form>
-
-    <p>
-    For a password hint, view source and find a password hint
-    in the HTML comments.
-    <!-- Hint: The password is the three character name of the 
-    programming language used in this class (all lower case) 
-    followed by 123. -->
-    </p>
+<h1>Welcome to Broken Rock Paper Scissors</h1>
+<p><strong>Note:</strong> This sample code is only
+partially done and serves only as a starting point for the assignment.
+</p>
+<p>
+<a href="login.php">Please Log In</a>
+</p>
+<p>
+Attempt to go to 
+<a href="game.php">game.php</a> without logging in - it should fail with an error message.
+<p>
+<a href="http://www.wa4e.com/code/rps.zip"
+ target="_blank">Source Code for this Application</a>
+</p>
 </div>
 </body>
-</html>
